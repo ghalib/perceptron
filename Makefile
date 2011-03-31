@@ -11,7 +11,7 @@ MAIN:= perceptest
 all: $(MAIN)
 
 $(MAIN): $(OBJS) 
-	$(CC) $(CFLAGS) $(INCLUDES) -lboost_filesystem-mt-1_35 -o $(MAIN) $(OBJS) 
+	$(CC) $(CFLAGS) $(INCLUDES) -o $(MAIN) $(OBJS) 
 
 # this is a suffix replacement rule for building .o's from .c's it
 # uses automatic variables $<: the name of the prerequisite of the
