@@ -37,7 +37,10 @@ void StdTokeniser::tokenise(const std::string& s, std::vector<std::string>& toke
         if (start >= s.length())
             break;
         end = find_first_not_alphanum(s, start);
-        tokens.push_back(std::string(s.begin() + start, s.begin() + end));
+	std::string token(s.begin() + start, s.begin() + end);
+	for (size_t i = 0; i < token.size(); i++)
+	  token[i] = std::tolower(token[i]);
+        tokens.push_back(token);
         start = end + 1;
     }
 }
