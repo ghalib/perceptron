@@ -9,11 +9,12 @@
 
 typedef std::pair<Document, short> DocPair;
 
-std::pair<std::string, std::string> split_feat_token(const std::string& token) {
+std::pair<size_t, double> split_feat_token(const std::string& token) {
   size_t index = token.find(':');
   std::string feat_id(token.begin(), token.begin() + index);
   std::string feat_value(token.begin() + index + 1, token.end());
-  return std::make_pair(feat_id, feat_value);
+  return std::make_pair(std::atoi(feat_id.c_str()),
+			std::atof(feat_value.c_str()));
 }
 
 void read_data(const char* file, std::vector<DocPair>& v) {
@@ -32,8 +33,8 @@ void read_data(const char* file, std::vector<DocPair>& v) {
       doc_class = std::atoi(token.c_str());
     }
     else {
-      std::pair<std::string, std::string> feature = split_feat_token(token);
-      size_t feat_id = std::atoi(feature.first.c_str());
+      std::pair<size_t, double> feature = split_feat_token(token);
+      size_t feat_id = feature.first;
 //       double feat_value = std::atof(feature.second.c_str());
       fv[feat_id] = 1;
     }

@@ -4,9 +4,6 @@
 #include <cctype>
 #include "tokeniser.hpp"
 
-#define PR(x)                                   \
-    std::cout << #x << " = " << x << std::endl;
-
 bool StdTokeniser::is_alphanum(char c) {
     return (std::isalpha(c) || std::isdigit(c));
 }
