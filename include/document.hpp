@@ -15,7 +15,7 @@ public:
   Document(const std::string&);
   Document(const std::string&, const std::string&);
   void set_features(const FeatureVector&);
-  FeatureVector get_features() const;
+  const FeatureVector& get_features() const;
   bool has_features() const;
   void set_doc_id(size_t id);
   size_t get_doc_id() const;

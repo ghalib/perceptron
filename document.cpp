@@ -11,7 +11,7 @@ void Document::set_features(const FeatureVector& fv) {
   features = fv;
 }
 
-FeatureVector Document::get_features() const {
+const FeatureVector& Document::get_features() const {
   return features;
 }
 

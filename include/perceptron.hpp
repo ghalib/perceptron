@@ -3,6 +3,7 @@
 
 #include "document.hpp"
 #include "featurevector.hpp"
+#include <iostream>
 
 template <typename Featuriser>
 class Perceptron {
@@ -22,7 +23,7 @@ public:
     return weightvector;
   }
 
-  short classify(Document& instance) const {
+  short classify(Document& instance) {
     if (!(instance.has_features()))
       f.set_feature_vector(instance);
     return get_sign(dot_product(avg, instance.get_features()));
@@ -33,7 +34,7 @@ public:
       f.set_feature_vector(instance);
     short prediction = classify(instance);
     if (prediction != label) {
-      weightvector.sum_update(instance.get_features(), prediction);
+      weightvector.sum_update(instance.get_features(), label);
     }
     avg.sum_update(weightvector, 1);
   }
