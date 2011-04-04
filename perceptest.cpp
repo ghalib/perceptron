@@ -36,6 +36,7 @@ void read_data(const char* file, std::vector<DocPair>& v) {
       std::pair<size_t, double> feature = split_feat_token(token);
       size_t feat_id = feature.first;
       double feat_value = feature.second;
+      fv[feat_id] = feat_value;
     }
   }
 }
