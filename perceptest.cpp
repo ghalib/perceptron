@@ -58,19 +58,24 @@ void classify(std::vector<DocPair>& v, Perceptron<Featuriser>& p) {
     else
       wrong += 1;
   }
-  std::cout << "correct = " << correct << '\n';
-  std::cout << "wrong = " << wrong << '\n';
+  // some 'dumb' scoring; can also calculate more nuanced F-scores
+  std::cerr << "correct = " << correct << '\n';
+  std::cerr << "wrong = " << wrong << '\n';
+  std::cerr << "accuracy = " << double(correct) / v.size() << '\n';
 }
 
 int main(int argc, char* argv[]) {
   Perceptron<TF<StdTokeniser> > p;
   std::vector<DocPair> training_set, testing_set;
   std::cout << "reading data..." << '\n';
-  read_data("/Users/ghalib/datasets/news20.binary/train", training_set);
-  read_data("/Users/ghalib/datasets/news20.binary/test", testing_set);
+  read_data(argv[1], training_set);
+  read_data(argv[2], testing_set);
   std::cout << "training..." << '\n';
   std::srand(11);
-  for (int i = 0; i < 1; i++) {
+  size_t num_iterations = 1;
+  if (argc > 3)
+    num_iterations = std::atoi(argv[3]);
+  for (size_t i = 0; i < num_iterations; i++) {
     std::random_shuffle(training_set.begin(), training_set.end());
     train(training_set, p);
   }

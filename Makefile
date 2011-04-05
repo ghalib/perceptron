@@ -1,5 +1,5 @@
 CC:= g++
-CFLAGS:= -ansi -pedantic -Wall -O2 -pg
+CFLAGS:= -ansi -pedantic -Wall -O2
 INCLUDES:= -Iinclude/ 
 SRCS:= document.cpp featurevector.cpp tokeniser.cpp vocabulary.cpp	\
 perceptest.cpp
