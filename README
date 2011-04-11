@@ -1,2 +1,14 @@
 Averaged-perceptron binary classifier.  Includes weighted-tf feature
 extractor.
+
+Evaluation:
+
+Initial rough-cut accuracy of 94.7% achieved with 2 training
+iterations on the news20.binary dataset at
+http://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary.html.
+
+Training set consists of 8000 examples: 4000 of +1 and 4000 of -1
+taken from news20.binary.  Remaning 11996 examples used for testing.
+
+
+
