@@ -38,9 +38,9 @@ public:
       FeatureVector fv = instance.get_features();
       for (FeatureVector::iterator it = fv.begin(); it != fv.end(); ++it) {
 	int key = it->first;
-	double last_value = current[key];
+	double value = current[key];
 	double last_update_value = last_update[key];
-	avg[key] += (time - last_update_value) * last_value;
+	avg[key] += (time - last_update_value) * value;
 	last_update[key] = time;
       }
       current.sum_update(instance.get_features(), label);
@@ -50,9 +50,9 @@ public:
   void finalise() {
     for (FeatureVector::iterator it = current.begin(); it != current.end(); ++it) {
       int key = it->first;
-      double last_value = it->second;;
+      double value = it->second;;
       double last_update_value = last_update[key];
-      avg[key] += (time - last_update_value) * last_value;
+      avg[key] += (time - last_update_value) * value;
     }
   }
 };
