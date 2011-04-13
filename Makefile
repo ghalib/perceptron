@@ -10,6 +10,12 @@ MAIN:= perceptest
 
 all: $(MAIN)
 
+deps = $(subst .cpp,.d,$(SRCS))
+-include $(deps)
+%.d: %.cpp
+	$(CC) $(CFLAGS) $(INCLUDES) -MM $< > $@
+
+
 $(MAIN): $(OBJS) 
 	$(CC) $(CFLAGS) $(INCLUDES) -o $(MAIN) $(OBJS) 
 
@@ -17,7 +23,7 @@ $(MAIN): $(OBJS)
 # uses automatic variables $<: the name of the prerequisite of the
 # rule(a .c file) and $@: the name of the target of the rule (a .o
 # file) (see the gnu make manual section about automatic variables)
-.cpp.o:
+%.o: %.cpp
 	$(CC) $(CFLAGS) $(INCLUDES) $< -c -o $@
 
 clean:
@@ -26,5 +32,6 @@ clean:
 depend: $(SRCS)
 	makedepend $(INCLUDES) $^
 
-
+test:
+	./perceptest ~/datasets/news20.binary/train ~/datasets/news20.binary/test $(ARGS)
 

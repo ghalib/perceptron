@@ -1,10 +1,11 @@
 #include "perceptron.hpp"
 #include "tf.hpp"
 #include "tokeniser.hpp"
+#include <cstdlib>
+#include <ctime>
 #include <fstream>
 #include <iostream>
 #include <sstream>
-#include <cstdlib>
 #include <utility>
 
 typedef std::pair<Document, short> DocPair;
@@ -78,6 +79,7 @@ int main(int argc, char* argv[]) {
   for (size_t i = 0; i < num_iterations; i++) {
     std::random_shuffle(training_set.begin(), training_set.end());
     train(training_set, p);
+    p.finalise();
   }
   std::cout << "classifying..." << std::endl;
   classify(testing_set, p);
