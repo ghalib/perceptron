@@ -9,8 +9,8 @@ class Perceptron {
 private:
   Featuriser f;
   FeatureVector current;
-  FeatureVector last_update;
   FeatureVector avg;
+  std::map<size_t, double> last_update;
   size_t time;
 
   short get_sign(double value) const {
@@ -39,9 +39,9 @@ public:
       for (FeatureVector::iterator it = fv.begin(); it != fv.end(); ++it) {
 	int key = it->first;
 	double last_value = current[key];
-	double& last_update_value = last_update[key];
+	double last_update_value = last_update[key];
 	avg[key] += (time - last_update_value) * last_value;
-	last_update_value = time;
+	last_update[key] = time;
       }
       current.sum_update(instance.get_features(), label);
     }
