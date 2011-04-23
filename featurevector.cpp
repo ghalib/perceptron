@@ -4,10 +4,6 @@
 
 FeatureVector::FeatureVector() {}
 
-bool FeatureVector::contains(int id) const {
-  return (find(id) != end());
-}
-
 double FeatureVector::get_norm() {
   double norm = 0.0;
   for (iterator it = begin(); it != end(); ++it)

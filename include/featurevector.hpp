@@ -6,7 +6,6 @@
 class FeatureVector : public std::map<int, double> {
 public:
   FeatureVector();
-  bool contains(int) const;
   double get_norm();
   void sum_update(const FeatureVector&, short);
 };

@@ -23,17 +23,20 @@ private:
 public:
   Perceptron() : time(0) {}
 
-  short classify(Document& instance) {
+  short classify(Document& instance, bool train=false) {
     if (!(instance.has_features()))
       f.set_feature_vector(instance);
-    return get_sign(dot_product(avg, instance.get_features()));
+    if (!train)
+      return get_sign(dot_product(avg, instance.get_features()));
+    else
+      return get_sign(dot_product(current, instance.get_features()));
   }
 
   void train(Document& instance, short label) {
     ++time;
     if (!(instance.has_features()))
       f.set_feature_vector(instance);
-    short prediction = classify(instance);
+    short prediction = classify(instance, true);
     if (prediction != label) {
       FeatureVector fv = instance.get_features();
       for (FeatureVector::iterator it = fv.begin(); it != fv.end(); ++it) {
