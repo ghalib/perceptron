@@ -1,7 +1,7 @@
 CC:= g++
 CFLAGS:= -ansi -pedantic -Wall -O2
 INCLUDES:= -Iinclude/ 
-SRCS:= document.cpp featurevector.cpp tokeniser.cpp vocabulary.cpp	\
+SRCS:= document.cpp  tokeniser.cpp vocabulary.cpp weightvector.cpp \
 perceptest.cpp
 OBJS:= $(SRCS:.cpp=.o)
 MAIN:= perceptest
@@ -34,4 +34,3 @@ depend: $(SRCS)
 
 test:
 	./perceptest ~/datasets/news20.binary/train ~/datasets/news20.binary/test $(ARGS)
-

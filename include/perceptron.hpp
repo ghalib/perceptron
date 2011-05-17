@@ -3,13 +3,16 @@
 
 #include "document.hpp"
 #include "featurevector.hpp"
+#include "weightvector.hpp"
+#include <iostream>
+#include <map>
 
 template <typename Featuriser>
 class Perceptron {
 private:
   Featuriser f;
-  FeatureVector current;
-  FeatureVector avg;
+  WeightVector current;
+  WeightVector avg;
   std::map<size_t, double> last_update;
   size_t time;
 
@@ -27,9 +30,9 @@ public:
     if (!(instance.has_features()))
       f.set_feature_vector(instance);
     if (!train)
-      return get_sign(dot_product(avg, instance.get_features()));
+      return get_sign(avg.dot_product(instance.get_features()));
     else
-      return get_sign(dot_product(current, instance.get_features()));
+      return get_sign(current.dot_product(instance.get_features()));
   }
 
   void train(Document& instance, short label) {
@@ -40,7 +43,7 @@ public:
     if (prediction != label) {
       FeatureVector fv = instance.get_features();
       for (FeatureVector::iterator it = fv.begin(); it != fv.end(); ++it) {
-	int key = it->first;
+	int key = it->id;
 	double value = current[key];
 	double last_update_value = last_update[key];
 	avg[key] += (time - last_update_value) * value;
@@ -51,11 +54,10 @@ public:
   }
 
   void finalise() {
-    for (FeatureVector::iterator it = current.begin(); it != current.end(); ++it) {
-      int key = it->first;
-      double value = it->second;;
-      double last_update_value = last_update[key];
-      avg[key] += (time - last_update_value) * value;
+    for (size_t id = 0; id < current.size(); id++) {
+      double value = current[id];
+      double last_update_value = last_update[id];
+      avg[id] += (time - last_update_value) * value;
     }
   }
 };

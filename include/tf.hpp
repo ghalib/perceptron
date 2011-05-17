@@ -41,7 +41,7 @@ public:
     for (it = tfpair.first.begin(); it != tfpair.first.end(); ++it) {
       int feat_id = vocab.put(it->first);
       double feat_value = double(it->second) / total;
-      fv[feat_id] = feat_value;
+      fv.push_back(FeaturePair(feat_id, feat_value));
     }
     doc.set_features(fv);
   }

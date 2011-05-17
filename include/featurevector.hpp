@@ -1,15 +1,15 @@
 #ifndef _FEATUREVECTOR_HPP
 #define _FEATUREVECTOR_HPP
 
-#include <map>
+#include <vector>
 
-class FeatureVector : public std::map<int, double> {
-public:
-  FeatureVector();
-  double get_norm();
-  void sum_update(const FeatureVector&, short);
+struct FeaturePair {
+  size_t id;
+  double value;
+  FeaturePair() : id(0), value(0) {}
+  FeaturePair(size_t id_, double val) : id(id_), value(val) {}
 };
 
-double dot_product(const FeatureVector&, const FeatureVector&);
+typedef std::vector<FeaturePair> FeatureVector;
 
 #endif
