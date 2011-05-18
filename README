@@ -1,4 +1,4 @@
-Averaged-perceptron binary classifier.  Includes weighted-tf feature
+Fast averaged-perceptron binary classifier.  Includes weighted-tf feature
 extractor.  Weight and feature vectors represented as cache-friendly
 std::vectors, which resulted in a 4-5x speedup over the previous
 representation as std::maps.
