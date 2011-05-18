@@ -14,7 +14,7 @@ private:
   WeightVector current;
   WeightVector avg;
   std::map<size_t, double> last_update;
-  size_t time;
+  size_t current_time;
 
   short get_sign(double value) const {
     if (value < 0)
@@ -24,7 +24,7 @@ private:
   }
 
 public:
-  Perceptron() : time(0) {}
+  Perceptron() : current_time(0) {}
 
   short classify(Document& instance, bool train=false) {
     if (!(instance.has_features()))
@@ -36,7 +36,7 @@ public:
   }
 
   void train(Document& instance, short label) {
-    ++time;
+    ++current_time;
     if (!(instance.has_features()))
       f.set_feature_vector(instance);
     short prediction = classify(instance, true);
@@ -45,9 +45,9 @@ public:
       for (FeatureVector::iterator it = fv.begin(); it != fv.end(); ++it) {
 	int key = it->id;
 	double value = current[key];
-	double last_update_value = last_update[key];
-	avg[key] += (time - last_update_value) * value;
-	last_update[key] = time;
+	double last_update_time = last_update[key];
+	avg[key] += (current_time - last_update_time) * value;
+	last_update[key] = current_time;
       }
       current.sum_update(instance.get_features(), label);
     }
@@ -56,8 +56,8 @@ public:
   void finalise() {
     for (size_t id = 0; id < current.size(); id++) {
       double value = current[id];
-      double last_update_value = last_update[id];
-      avg[id] += (time - last_update_value) * value;
+      double last_update_time = last_update[id];
+      avg[id] += (current_time - last_update_time) * value;
     }
   }
 };
