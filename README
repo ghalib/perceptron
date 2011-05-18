@@ -3,7 +3,7 @@ extractor.
 
 Evaluation:
 
-Initial rough-cut accuracy of 94.7% achieved with 2 training
+Initial rough-cut accuracy of 95.7% achieved with 2 training
 iterations on the news20.binary dataset at
 http://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary.html.
 
