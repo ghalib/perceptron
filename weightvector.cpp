@@ -1,9 +1,6 @@
 #include "weightvector.hpp"
 #include <iostream>
 
-#define PR(x) \
-  std::cerr << #x << " = " << x << std::endl;
-
 WeightVector::WeightVector() {}
 
 double WeightVector::dot_product(const FeatureVector& fv) {
