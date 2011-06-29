@@ -26,20 +26,21 @@ void read_data(const char* file, std::vector<DocPair>& v) {
   std::string token;
   short doc_class = 0;
   FeatureVector fv;
+  Document doc;
   while (in >> token) {
     if ((token == "-1") || (token == "+1")) {
       if (doc_class != 0) {
-	Document doc;
 	doc.set_features(fv);
 	v.push_back(std::make_pair(doc, doc_class));
 	fv.clear();
       }
       doc_class = std::atoi(token.c_str());
     }
-    else {
+    else
       fv.push_back(split_feat_token(token));
-    }
   }
+  // push back last vector
+  v.push_back(std::make_pair(doc, doc_class));
 }
 
 template<typename Featuriser>
@@ -71,7 +72,6 @@ int main(int argc, char* argv[]) {
   std::cout << "reading data..." << '\n';
   read_data(argv[1], training_set);
   read_data(argv[2], testing_set);
-
   std::cout << "training..." << '\n';
   std::srand(11);
   size_t num_iterations = 1;

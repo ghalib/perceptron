@@ -5,7 +5,7 @@ representation as std::maps.
 
 Evaluation:
 
-Initial rough-cut accuracy of 95.7% achieved with 2 training
+Initial rough-cut accuracy of 95.8% achieved with 2 training
 iterations on the news20.binary dataset at
 http://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary.html.
 
